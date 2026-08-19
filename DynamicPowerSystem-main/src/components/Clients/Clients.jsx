@@ -1,13 +1,13 @@
 import "./Clients.css";
 
-import eastmanLogo  from "../../assets/images/clients/eastman.png";
-import vguardLogo   from "../../assets/images/clients/vguard.png";
-import havellsLogo  from "../../assets/images/clients/havells.png";
+import eastmanLogo from "../../assets/images/clients/eastman.png";
+import vguardLogo from "../../assets/images/clients/vguard.png";
+import havellsLogo from "../../assets/images/clients/havells.png";
 
 const clients = [
     { name: "Havells", type: "image", logo: havellsLogo },
-    { name: "Eastman", type: "image", logo: eastmanLogo },
-    { name: "V-Guard", type: "image", logo: vguardLogo },
+    { name: "Eastman", type: "image", logo: eastmanLogo, className: "eastman-img" },
+    { name: "V-Guard", type: "image", logo: vguardLogo, className: "vguard-img" },
     { name: "Racold", text: "Racold", type: "box", bg: "#e31e24", color: "#fff" },
     { name: "Asha Power", text: "ASHA POWER", type: "icon", bg: "#fff", color: "#0b5b9e", icon: "triangle" },
     { name: "Crompton", text: "Crompton", type: "box", bg: "#004785", color: "#fff" },
@@ -31,7 +31,12 @@ function Clients() {
                 {/* Static Client Logos Grid */}
                 <div className="clients-grid">
                     {clients.map((c, i) => (
-                        <div className="client-logo-card" key={i} title={c.name}>
+                        <div 
+                            className="client-logo-card" 
+                            key={i} 
+                            title={c.name}
+                            style={c.name === 'V-Guard' ? { backgroundColor: '#fff', borderColor: '#ddd', padding: 0 } : {}}
+                        >
                             <div
                                 className={`client-brand client-brand--${c.type}`}
                                 style={{ backgroundColor: c.bg, color: c.color, borderColor: c.type === 'pill' ? c.bg : 'transparent' }}
@@ -40,7 +45,7 @@ function Clients() {
                                     <img
                                         src={c.logo}
                                         alt={`${c.name} logo`}
-                                        className="client-logo-img"
+                                        className={`client-logo-img${c.className ? ` ${c.className}` : ''}`}
                                     />
                                 )}
                                 {c.icon === 'sun' && c.type !== 'eastman' && (

@@ -77,6 +77,24 @@
     border-radius: 6px;
 }
 
+/* V-Guard logo size in clients grid */
+.vguard-img {
+    width: 100%;
+    height: 70%;
+    object-fit: contain;
+    object-position: center;
+    margin: auto;
+}
+
+/* Eastman official logo */
+.eastman-img {
+    width: 90%;
+    height: 80%;
+    object-fit: contain;
+    object-position: center;
+    margin: auto;
+}
+
 /* Different logo shapes based on brand */
 .client-brand--box {
     border-radius: 8px;
