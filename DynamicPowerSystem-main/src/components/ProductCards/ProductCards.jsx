@@ -2,13 +2,17 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import './ProductCards.css';
 
-import imgPlant    from '../../assets/images/prod-solar-plant.png';
-import imgHeater   from '../../assets/images/prod-water-heater.png';
-import imgHeater2  from '../../assets/images/prod-water-heater-2.png';
-import imgPump     from '../../assets/images/prod-water-pump.png';
-import imgStreet   from '../../assets/images/prod-street-light.png';
-import imgUPS      from '../../assets/images/prod-home-ups.png';
+import imgPlant from '../../assets/images/prod-solar-plant.png';
+import imgHeater from '../../assets/images/prod-water-heater.png';
+import imgHeater2 from '../../assets/images/prod-water-heater-2.png';
+import imgPump from '../../assets/images/prod-water-pump.png';
+import imgStreet from '../../assets/images/prod-street-light.png';
+import imgUPS from '../../assets/images/prod-home-ups.png';
 import imgInverter from '../../assets/images/prod-inverter.png';
+import imgEastman from '../../assets/images/prod-eastman-inverter.png';
+import imgEastmanYellowBattery from '../../assets/images/prod-eastman-yellow-battery.png';
+import imgVGuardSolsmart from '../../assets/images/prod-vguard-solsmart.png';
+import imgVGuardBattery from '../../assets/images/prod-vguard-battery.png';
 
 const products = [
     {
@@ -84,9 +88,11 @@ const products = [
             'Pure sine wave output for all appliances',
             'Scalable battery bank capacity',
         ],
-        img: imgUPS,
+        imgs: [imgVGuardSolsmart, imgEastman],
         bg: '#150a2e',
         accent: '#f47b20',
+        fit: 'contain',
+        imgBg: '#ffffff',
     },
     {
         id: 6,
@@ -99,7 +105,7 @@ const products = [
             'Expert installation & AMC support',
             'Finance & EMI options available',
         ],
-        img: imgInverter,
+        imgs: [imgVGuardBattery, imgEastmanYellowBattery],
         bg: '#0d1117',
         accent: '#f47b20',
         fit: 'contain',
@@ -107,7 +113,7 @@ const products = [
     },
 ];
 
-/* ── Hover-triggered image slider for multi-image cards ── */
+/* ── Hover/Click-triggered image slider for multi-image cards ── */
 function ImageSlider({ imgs, title, fit, imgBg }) {
     const [activeIdx, setActiveIdx] = useState(0);
     const timerRef = useRef(null);
@@ -116,12 +122,16 @@ function ImageSlider({ imgs, title, fit, imgBg }) {
         if (timerRef.current) return;
         timerRef.current = setInterval(() => {
             setActiveIdx(prev => (prev + 1) % imgs.length);
-        }, 1000);
+        }, 1200);
     };
 
     const stopSliding = () => {
         clearInterval(timerRef.current);
         timerRef.current = null;
+    };
+
+    const handleNextImage = () => {
+        setActiveIdx(prev => (prev + 1) % imgs.length);
     };
 
     // Cleanup on unmount
@@ -132,6 +142,8 @@ function ImageSlider({ imgs, title, fit, imgBg }) {
             className="pc-slider"
             onMouseEnter={startSliding}
             onMouseLeave={stopSliding}
+            onClick={handleNextImage}
+            title="Click to change image"
         >
             {imgs.map((src, i) => (
                 <img
@@ -152,7 +164,10 @@ function ImageSlider({ imgs, title, fit, imgBg }) {
                     <button
                         key={i}
                         className={`pc-slider-dot${i === activeIdx ? ' pc-slider-dot--active' : ''}`}
-                        onClick={() => setActiveIdx(i)}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveIdx(i);
+                        }}
                         aria-label={`Show image ${i + 1}`}
                     />
                 ))}
@@ -217,7 +232,7 @@ function ProductCards() {
                                         aria-label="Chat on WhatsApp"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15" aria-hidden="true">
-                                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.816 5.816 0 0 0-.571-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+                                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.816 5.816 0 0 0-.571-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
                                         </svg>
                                         WhatsApp
                                     </a>
@@ -227,7 +242,7 @@ function ProductCards() {
                                         aria-label="Call us now"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="15" height="15" aria-hidden="true">
-                                            <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02L6.62 10.79Z"/>
+                                            <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.29 21 3 13.71 3 4.5c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02L6.62 10.79Z" />
                                         </svg>
                                         Call
                                     </a>
