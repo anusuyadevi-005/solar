@@ -42,7 +42,7 @@ function Navbar() {
 
                 {/* Logo */}
                 <Link to="/" className="logo" onClick={closeAll}>
-                    <img src="/logo.png" alt="Dynamic Solar Logo" className="logo-img" />
+                    <img src="/logo.png" alt="Dynamic Power Systems Logo" className="logo-img" />
                 </Link>
 
                 {/* Desktop Nav */}

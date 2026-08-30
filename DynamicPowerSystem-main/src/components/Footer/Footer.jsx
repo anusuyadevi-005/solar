@@ -38,8 +38,7 @@ function Footer() {
                     {/* Brand Column */}
                     <div className="footer-col footer-brand">
                         <Link to="/" className="footer-logo">
-                            <span className="footer-logo-dynamic">Dynamic</span>
-                            <span className="footer-logo-solar">Solar</span>
+                            <img src="/logo.png" alt="Dynamic Power Systems Logo" className="footer-logo-img" />
                         </Link>
                         <p className="footer-tagline">
                             Discover a Sustainable Lifestyle with cutting-edge power systems.
