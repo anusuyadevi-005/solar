@@ -37,12 +37,12 @@
 }
 
 .logo-img {
-    height: 56px;
+    height: 80px;
     width: auto;
     object-fit: contain;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
-    padding: 5px 12px;
+    padding: 6px 16px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -596,6 +596,10 @@
 }
 
 @media (max-width: 900px) {
+    .logo-img {
+        height: 60px;
+        padding: 5px 12px;
+    }
 
     .nav-links,
     .nav-cta {
